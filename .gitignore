@@ -2,3 +2,5 @@ db.sqlite3
 static/media/profile_pictures
 atomtables_website/settings.py
 venv
+.idea
+/.idea/.gitignore
