@@ -1,0 +1,54 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/header.css' %}">
+
+
+<header class="header">
+    <div class="header-text">
+        <button class="title" onclick="document.location.href = '/';">
+            atomtables
+        </button>
+    </div>
+    <div class="right-selectors">
+        <button class="header-button" onclick="document.location.href = '/account/settings'">Settings</button>
+        <padder class="padding-space"></padder>
+        <button class="header-button" onclick="document.location.href = '/chatting/main'">Chat</button>
+        <padder class="padding-space"></padder>
+        {% if user.is_authenticated %}
+            <!-- the user is considered to be logged in?-->
+            <div class="title header-button" style="display: inline-flex;" id="userInfo" onclick="dropdownOnClick()">
+                <img class="user-pfp" src="{{ user.profile.profile_picture.url }}" alt="avatar">
+                <padder class="padding-space"></padder>
+                <div class="user_container">
+                    <div class="user_firstname">{{ user.first_name }}</div>
+                    {{ user.last_name }}
+                </div>
+            </div>
+        {% else %}
+            <div class="title header-button" style="display: inline-flex;" id="userInfo">
+                <img class="user-pfp" src="{% static "img/user_pfp.webp" %}" alt="avatar">
+                <padder class="padding-space"></padder>
+                <div class="user_container">
+                    <div class="user_firstname"><a href="/account/login?next={{ request.path }}" class="user_links">Sign in</a></div>
+                    or <a href="/account/register?next={{ request.path }}" class="user_links">register</a>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+</header>
+{% if user.is_authenticated %}
+    <div class="dropdown-content" id="userInfoDropdown">
+        <a class="dropdown-link" id="primary-link" href="/account/logout">Log Out</a>
+        <a class="dropdown-link" href="#">Link 2</a>
+        <a class="dropdown-link" href="#">Link 3</a>
+    </div>
+{% endif %}
+<script src="{% static 'scripts/header_dropdown.js' %}"></script>
+
+{% if messages %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}" {% endif %} >
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}

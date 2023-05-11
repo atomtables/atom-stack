@@ -1,0 +1,63 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <card class="main">
+        <div class="main-text">
+            Register
+        </div>
+        <form method="POST">
+            <br>
+            {% csrf_token %}
+            <div class="card-p-text" style="display: flex;">
+                <div class="card-input">
+                    First Name: {{ register_form.first_name }}
+                </div>
+                <padder class="padding-space"></padder>
+                <div class="card-input">
+                    Last Name: {{ register_form.last_name }}
+                </div>
+                <br><br>
+                <div class="card-input">
+                    Username: {{ register_form.username }}
+                </div>
+                <padder class="padding-space"></padder>
+                <div class="card-input">
+                    Email: {{ register_form.email }}
+                </div>
+            </div>
+            <div class="card-p-text" style="display: flex;">
+                <div class="card-p-text">
+                    Requirements for your password:
+                    <ul>
+                        <li>Your password can’t be too similar to your other info.</li>
+                        <li>Your password must be longer than 8 characters.</li>
+                        <li>Your password can’t be common.</li>
+                    </ul>
+                </div>
+                <div class="card-input">
+                    Password: {{ register_form.password1 }}
+                </div>
+                <div class="card-input">
+                    Confirmation: {{ register_form.password2 }}
+                </div>
+            </div>
+            <div class="card-button-group">
+                <button class="card-button" type="submit">
+                    Register
+                </button>
+                <div class="container py-5">
+                    <p class="text-center">
+                        If you already have an account, <a href="/account/login" class="user_links">login</a> instead.
+                    <br>
+                        You can change additional information about your user later in your user settings.
+                        However, you can't change your username unless you create a new account.
+                    </p>
+                </div>
+            </div>
+        </form>
+
+    </card>
+
+    <!--Register-->
+
+{% endblock %}

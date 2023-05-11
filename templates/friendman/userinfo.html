@@ -1,0 +1,34 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+    <card class="main">
+        <div class="main-text">
+            <img class="pfp" src="{{ pfp }}" alt="pfp">
+            <br>
+            {{ username }}
+            {% if friend == 'Y' %}
+                <div style="font-size: 16px;">
+                    {{ first_name }} {{ last_name }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="card-p-text">
+            {{ bio }}
+        </div>
+        <div class="card-p-text" style="display: flex">
+            <div style="flex: 1;">Created account on {{ date_joined }}</div>
+            <div style="flex: 1;">Last logged in on {{ last_login }}</div>
+        </div>
+        <div class="card-button-group">
+            {% if friend == 'N' %}
+            <button class="card-button">Request Friendship</button>
+            {% elif friend == 'R' %}
+            <button class="card-button" disabled>Friendship Requested</button>
+            {% elif friend == 'Y' %}
+            <button class="card-button">Remove Friend</button>
+            {% endif %}
+        </div>
+    </card>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <card class="main">
+        <div class="main-text">
+            Login
+        </div>
+        <form method="POST">
+            <br>
+            {% csrf_token %}
+            <div class="card-p-text" style="display: flex;">
+                <div class="card-input">
+                    Username: {{ login_form.username }}
+                </div>
+                <div class="card-input">
+                    Password: {{ login_form.password }}
+                </div>
+                <div class="card-button-group">
+                    <button class="card-button" type="submit">
+                        Login
+                    </button>
+                </div>
+            </div>
+            <p class="card-p-text">
+                Don't have an account? <a href="/account/register" class="user_links">Register</a> instead.
+                <br>
+                <br>
+                <a href="/account/password_reset" class="user_links">Forgot Password?</a> No worries!
+            </p>
+
+        </form>
+    </card>
+
+    <!--Register-->
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+    <card class="main">
+        <div class="main-text">
+            Change Name:
+        </div>
+        <form method="POST">
+            <br>
+            {% csrf_token %}
+            <div class="card-p-text" style="display: flex; justify-content: space-evenly">
+                {% csrf_token %}
+                <div class="card-p-text">
+                    Old Name: {{ user.first_name }} {{ user.last_name }}
+                </div>
+                <div class="card-input">
+                    {{ form.first_name.errors }}
+                    First Name: {{ form.first_name }}
+                </div>
+                <div class="card-input">
+                    {{ form.last_name.errors }}
+                    Last Name: {{ form.last_name }}
+                </div>
+            </div>
+            <div class="card-button-group">
+                <button class="card-button" type="submit">Set Name</button>
+            </div>
+        </form>
+    </card>
+
+{% endblock %}

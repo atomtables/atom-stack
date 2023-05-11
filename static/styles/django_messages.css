@@ -1,0 +1,53 @@
+@keyframes progressBar {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.error {
+    background-color: #b94242;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+    float: right;
+    animation: progressBar 7.5s ease-in forwards;
+}
+
+.warning {
+    background-color: darkgoldenrod;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+    float: right;
+    animation: progressBar 7.5s ease-in forwards;
+}
+
+.success {
+    background-color: seagreen;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+    float: right;
+    animation: progressBar 7.5s ease-in forwards;
+}
+
+.info {
+    background-color: darkslategrey;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+    float: right;
+    animation: progressBar 7.5s ease-in forwards;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>{% block title %} Adithiya's Website {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/django_messages.css' %}">
+    <link rel="stylesheet" href="{% static "styles/cards.css" %}">
+    <!--suppress CssUnknownTarget -->
+    <style>
+        /* import roboto font from google */
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        /* set background image */
+        body {
+            background-image: url('{% static 'img/background.png' %}');
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+{% include "global/header.html" %}
+
+{% block content %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+    <card class="main">
+        <div class="main-text">
+            Change Email Address:
+        </div>
+        <form method="POST">
+            <br>
+            {% csrf_token %}
+            <div class="card-p-text" style="display: flex; justify-content: space-evenly">
+                {% csrf_token %}
+                <div class="card-p-text">
+                    Old Email: {{ user.email }}
+                </div>
+                <div class="card-input">
+                    {{ form.email.errors }}
+                    Email: {{ form.email }}
+                </div>
+            </div>
+            <div class="card-button-group">
+                <button class="card-button" type="submit">Set Email</button>
+            </div>
+        </form>
+    </card>
+
+{% endblock %}

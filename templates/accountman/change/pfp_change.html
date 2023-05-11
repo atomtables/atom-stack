@@ -1,0 +1,24 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+    <card class="main">
+        <div class="main-text">
+            Change Profile Picture:
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            <br>
+            {% csrf_token %}
+            <div class="card-p-text" style="display: flex; justify-content: space-evenly">
+                <div class="card-input">
+                    {{ form.profile_picture.errors }}
+                    Profile Picture: {{ form.profile_picture }}
+                </div>
+            </div>
+            <div class="card-button-group">
+                <button class="card-button" type="submit">Set PFP</button>
+            </div>
+        </form>
+    </card>
+
+{% endblock %}
