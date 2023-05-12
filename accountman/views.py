@@ -37,9 +37,10 @@ def register_request(request):
 
 
 def login_request(request):
+    tbr = request.GET.get('next', '/')
     if request.user.is_authenticated:
         messages.success(request, f"No need to sign in: You are signed in as {request.user.username}")
-        return redirect(request.GET.get('next', '/'))
+        return redirect(tbr)
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -49,7 +50,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                redirect(request.GET.get('next', '/'))
+                redirect('/')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -65,6 +66,7 @@ def logout_request(request):
 
 
 def settings(request):
+    print(request)
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to access this page.")
         return redirect(f"/account/login?next={request.path}")

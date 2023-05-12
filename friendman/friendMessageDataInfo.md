@@ -1,4 +1,4 @@
-# INFORMATION ABOUT FRIEND MESSAGE DATA
+# INFORMATION ABOUT FRIEND DATA
 
 The model FriendMessageData is a model that contains the 
 information of friend requests, friend information, and chat
@@ -6,15 +6,6 @@ messages that may have been sent.
 
 ## FriendRequest
 * **user**: The username of the user that sent the friend rq
-* **status**: The status of the friend request. Can be one of the following:
-    * **PENDING**: The friend request has not been accepted or denied
-    * **ACCEPTED**: The friend request has been accepted
-    * **DENIED**: The friend request has been denied
-    * If the friend request has been accepted, 
-      the user1 and user2 will be added to each 
-      other's friend list, and the friend request will be deleted
-    * If the friend request was denied, it will be deleted from
-         the database
 * **date**: The date the friend request was sent. This will be 
             stored in epoch time, for easy time zone manipulation
 * **id**: The id of the friend request. This is a unique id
@@ -24,7 +15,6 @@ Friend request information will be stored in the database as a
 python list. An example of this is shown below:
 
     "user": "atomtables",
-    "status": "PENDING",
     "date": 1234567890,
     "id": "72826-7ds7ashd289j-4324764" ***randomly generated***
 
@@ -54,34 +44,3 @@ accessed by the user using the url: `/friends/<username>`. To
 chat with a friend, a user will go to `/chatting/<username>`. The user
 will be unable to chat with a user until they have sent a friend
 request, and the friend request has been accepted.
-
-## Message
-Every person will communicate with their friends, and these
-messages will be sent and stored on the other side. If the user
-is online, messages will be sent directly to their user with
-the same JSON layout. Otherwise, if they are not online, the
-messages will be stored in the database. The database will only
-hold 100 messages from each friend before deleting the earlier
-messages.
-
-* Each item will be in a dictionary in the list.
-  * **user**: the username of the person who sent the message
-  * **date**: the epoch time when the message was sent
-  * **message**: the message information
-
-Message information will be stored in the database as a python
-list. An example of this is shown below.
-
-    [
-        {
-            "user": "atomtables",
-            "date": 1234567890,
-            "message": "this is testing",
-        },
-        {
-            "user": "atomchairs",
-            "date": 1234567890,
-            "message": "ok got it",
-        },
-    ]
-    

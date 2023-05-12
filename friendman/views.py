@@ -13,14 +13,14 @@ def userpage(request, username):
         return HttpResponse('No such user exists', status=404)
     if user is not None:
         print(f"User {user} found")
-        for u in user.friendmessagedata.friends:
+        for u in user.friend.friends:
             print(u)
             if u['user'] == request.user.username:
                 print(f"User {request.user.username} is friends with {u['user']}")
                 friend = 'Y'
                 break
         else:
-            for u in user.friendmessagedata.friend_requests:
+            for u in user.friend.friend_requests:
                 print(u)
                 if u['user'] == request.user.username:
                     print(f"User {request.user.username} has a friend request to {u['user']}")
@@ -37,7 +37,7 @@ def userpage(request, username):
             'bio': user.profile.bio,
             'friend': friend,
             'date_joined': user.date_joined.strftime('%B %e, %Y'),
-            'last_login': user.last_login.strftime('%B %e, %Y'),
+            'last_login': user.last_login.strftime('%B %e, %Y') if user.last_login is not None else 'Never',
         }
         return render(request, 'friendman/userinfo.html', context)
 

@@ -12,7 +12,7 @@ class Profile(models.Model):
     profile_picture = models.ImageField(
         blank=True,
         upload_to=f"profile_pictures/{random.getrandbits(128)}",
-        default="profile_pictures/user_pfp.webp"
+        default="profile_pictures/user_pfp.png"
     )
 
 
