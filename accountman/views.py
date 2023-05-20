@@ -37,10 +37,9 @@ def register_request(request):
 
 
 def login_request(request):
-    tbr = request.GET.get('next', '/')
     if request.user.is_authenticated:
         messages.success(request, f"No need to sign in: You are signed in as {request.user.username}")
-        return redirect(tbr)
+        return redirect('/')
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():

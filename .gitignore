@@ -4,3 +4,5 @@ atomtables_website/settings.py
 venv
 .idea
 /.idea/.gitignore
+*.pyc
+.run

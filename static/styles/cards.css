@@ -47,6 +47,11 @@
     background-color: rgb(60, 110, 60);
 }
 
+.card-button:disabled, .card-button[disabled] {
+    background-color: rgb(20, 50, 20);
+    color: rgb(150, 150, 150);
+}
+
 .card-button-group {
     text-align: center;
 }

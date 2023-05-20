@@ -22,13 +22,43 @@
         </div>
         <div class="card-button-group">
             {% if friend == 'N' %}
-            <button class="card-button">Request Friendship</button>
+            <button class="card-button" onclick="request_friendship()" id="request_button">Request Friendship</button>
             {% elif friend == 'R' %}
             <button class="card-button" disabled>Friendship Requested</button>
             {% elif friend == 'Y' %}
             <button class="card-button">Remove Friend</button>
+            {% elif friend == 'S' %}
+            <button class="card-button" onclick="document.location.href = '/account/login'">Sign in to Add Friend</button>
             {% endif %}
         </div>
     </card>
+    <script>
+    function request_friendship() {
+        let rq = new XMLHttpRequest();
+        rq.open("GET", '/api/frq/{{ username }}', true );
+        rq.send( null );
+        let status;
+        setTimeout(() => {
+            status = rq.status
+            if (status === 200) {
+                document.location.reload();
+            } else if (status === 403) {
+                document.location.href = '/friend/user/{{ username }}?error=403';
+            } else {
+                document.location.href = '/friend/user/{{ username }}?error=true';
+            }
+        }, 750)
+    }
+    function remove_friendship(username) {
+        let rq = new XMLHttpRequest();
+        rq.open("GET", '/api/fd/' + username, true );
+        rq.send( null );
+        if (rq.status === 200) {
+            document.location.reload();
+        } else {
+            document.location.href = '/friend/user/' + username + "?error=true"
+        }
+    }
+    </script>
 
 {% endblock %}
