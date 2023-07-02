@@ -3,62 +3,83 @@
 {% block content %}
 
     <card class="main">
-        <div class="main-text">
-            <img class="pfp" src="{{ pfp }}" alt="pfp">
-            <br>
-            {{ username }}
-            {% if friend == 'Y' %}
-                <div style="font-size: 16px;">
-                    {{ first_name }} {{ last_name }}
+        <div style="display:flex; justify-content: space-between; padding: 10px;">
+            <div style="display: flex; align-items:flex-start;">
+                <img class="pfp" src="{{ pfp }}" alt="pfp">
+                <padder class="padding-space"></padder>
+                <div class="main-text"
+                     style="font-size: x-large; display: flex; flex-direction: column; justify-content: flex-start;">
+                    <div>{{ username }}</div>
+                    <div style="font-size:large">important info here</div>
+                    <div style="font-size:medium">Online/Away/Offline/Do Not Disturb</div>
                 </div>
-            {% endif %}
+            </div>
+            <div class="card-button-group" style="text-align: right;">
+                <button class="card-button"><a href="/account/register">Register</a></button>
+                <button class="card-button"><a href="/account/password_reset">Forgot Password</a></button>
+                <div style="font-size:medium; padding-top: 5px;text-align:right;" class="">
+                    Created account on {{ date_joined }}
+                </div>
+                <div style="font-size:medium; padding-top: 5px; text-align: right;">
+                    Last logged in on {{ last_login }}
+                </div>
+            </div>
         </div>
-        <div class="card-p-text">
-            {{ bio }}
+        <div class="card-p-text" style="display: flex;">
+            <div style="flex: 1; text-align: left; word-wrap: break-word;">
+                {{ bio }}
+            </div>
+            <div class="card-button-group">
+                {% if friend == 'N' %}
+                    <a class="card-button" onclick="request_friendship()" id="request_button">Request Friendship</a>
+                {% elif friend == 'R' %}
+                    <a class="card-button" disabled>Friendship Requested</a>
+                {% elif friend == 'Y' %}
+                    <a class="card-button">Remove Friend</a>
+                {% elif friend == 'S' %}
+                    <a class="card-button" href="/account/login?next=/friend/user/{{ username }}">Sign in to Add
+                        Friend</a>
+                {% endif %}
+            </div>
         </div>
-        <div class="card-p-text" style="display: flex">
-            <div style="flex: 1;">Created account on {{ date_joined }}</div>
-            <div style="flex: 1;">Last logged in on {{ last_login }}</div>
-        </div>
-        <div class="card-button-group">
-            {% if friend == 'N' %}
-            <button class="card-button" onclick="request_friendship()" id="request_button">Request Friendship</button>
-            {% elif friend == 'R' %}
-            <button class="card-button" disabled>Friendship Requested</button>
-            {% elif friend == 'Y' %}
-            <button class="card-button">Remove Friend</button>
-            {% elif friend == 'S' %}
-            <button class="card-button" onclick="document.location.href = '/account/login'">Sign in to Add Friend</button>
-            {% endif %}
-        </div>
+
     </card>
     <script>
-    function request_friendship() {
-        let rq = new XMLHttpRequest();
-        rq.open("GET", '/api/frq/{{ username }}', true );
-        rq.send( null );
-        let status;
-        setTimeout(() => {
-            status = rq.status
-            if (status === 200) {
-                document.location.reload();
-            } else if (status === 403) {
-                document.location.href = '/friend/user/{{ username }}?error=403';
-            } else {
-                document.location.href = '/friend/user/{{ username }}?error=true';
-            }
-        }, 750)
-    }
-    function remove_friendship(username) {
-        let rq = new XMLHttpRequest();
-        rq.open("GET", '/api/fd/' + username, true );
-        rq.send( null );
-        if (rq.status === 200) {
-            document.location.reload();
-        } else {
-            document.location.href = '/friend/user/' + username + "?error=true"
+
+        // TODO: replace XMLHttpRequest with fetch
+        function request_friendship() {
+            let rq = new XMLHttpRequest();
+            rq.open("GET", '/api/frq/{{ username }}', true);
+            rq.send(null);
+            let status;
+            setTimeout(() => {
+                status = rq.status
+                if (status === 200) {
+                    document.location.reload();
+                } else if (status === 403) {
+                    document.location.href = '/friend/user/{{ username }}?error=403';
+                } else {
+                    document.location.href = '/friend/user/{{ username }}?error=true';
+                }
+            }, 500)
         }
-    }
+
+        function remove_friendship() {
+            let rq = new XMLHttpRequest();
+            rq.open("GET", '/api/fd/{{ username }}', true);
+            rq.send(null);
+            let status;
+            setTimeout(() => {
+                status = rq.status
+                if (status === 200) {
+                    document.location.reload();
+                } else if (status === 403) {
+                    document.location.href = '/friend/user/{{ username }}?error=403';
+                } else {
+                    document.location.href = '/friend/user/{{ username }}?error=true';
+                }
+            }, 500)
+        }
     </script>
 
 {% endblock %}

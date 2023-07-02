@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="atom-stack" type="Python.DjangoServer" factoryName="Django server">
     <module name="atom-stack" />

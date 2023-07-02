@@ -44,3 +44,11 @@ accessed by the user using the url: `/friends/<username>`. To
 chat with a friend, a user will go to `/chatting/<username>`. The user
 will be unable to chat with a user until they have sent a friend
 request, and the friend request has been accepted.
+
+## UPDATE 20/5
+we are adding an extra field to the friend information
+model called `outgoing_friend_requests`. This will only
+be used to manage the friend requests that the user has
+sent. This will be stored in the database as a python list.
+For everything else, we will use `incoming_friend_requests`,
+prior known as `friend_requests`.

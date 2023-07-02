@@ -1,0 +1,42 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/styles/cards__list.css">
+    <card class="main main__list">
+        <div class="list-item">
+            <div style="display:flex; justify-content: space-between; padding: 10px;">
+                <div class="list-item-h" style="font-size: x-large">Friends</div>
+                <div class="card-button-group">
+                    <a href="/friend/add" class="card-button">Add Friend</a>
+                    <a href="/friend/requests" class="card-button">Friend Requests</a>
+                </div>
+            </div>
+            {% if not friends %}
+                <h4>No Friends</h4>
+            {% else %}
+                <ul class="list">
+                    {% for friend in friends %}
+                        <li>
+                            <a href="/friend/user/{{ friend.user }}">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="{{ friend.pfp }}" alt="{{ friend.user }}'s profile picture"
+                                                 style="display: block;height: 32px;width: 32px;object-fit: cover;border-radius: 100%;margin: 0 auto;padding-right:5px;">
+                                        </td>
+                                        <td>
+                                            <div style="font-size:22px">{{ friend.user }}</div>
+                                            Friended on {{ friend.date_added }} -- {% if friend.status == "Online" %} <span
+                                                    style="color: green">Online</span> {% else %} {{ friend.status }} {% endif %}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </card>
+
+{% endblock %}

@@ -14,6 +14,7 @@ class Profile(models.Model):
         upload_to=f"profile_pictures/{random.getrandbits(128)}",
         default="profile_pictures/user_pfp.png"
     )
+    last_visit = models.DateTimeField(blank=True, null=True)
 
 
 @receiver(post_save, sender=User)
