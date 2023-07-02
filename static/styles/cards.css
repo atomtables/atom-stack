@@ -1,3 +1,7 @@
+html, body {
+    height: calc(100% - 4px);
+}
+
 .main {
     background: linear-gradient(135deg, rgba(20, 40, 20, 0.9), rgba(20, 40, 40, 0.9));
     color: rgb(255, 255, 255);
@@ -15,10 +19,10 @@
 }
 
 .main-text {
-    font-size: xx-large;
+    font-size: x-large;
     color: white;
-    text-align: center;
-
+    text-align: left;
+    display: inline-block;
 }
 
 .card-p-text {
@@ -104,8 +108,8 @@ textarea[type=large-text] {
 
 img.pfp {
     display: inline-block;
-    height: 128px;
-    width: 128px;
+    height: 80px;
+    width: 80px;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 10px;
 }

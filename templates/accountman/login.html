@@ -2,8 +2,12 @@
 
 {% block content %}
     <card class="main">
-        <div class="main-text">
-            Login
+        <div style="display:flex; justify-content: space-between; padding: 10px;">
+            <div class="main-text" style="font-size: x-large">Login to your user {{ login_errors }}</div>
+            <div class="card-button-group">
+                <a href="/account/register" class="card-button">Register</a>
+                <a href="/account/password_reset" class="card-button">Forgot Password</a>
+            </div>
         </div>
         <form method="POST">
             <br>
@@ -21,13 +25,8 @@
                     </button>
                 </div>
             </div>
-            <p class="card-p-text">
-                Don't have an account? <a href="/account/register" class="user_links">Register</a> instead.
-                <br>
-                <br>
-                <a href="/account/password_reset" class="user_links">Forgot Password?</a> No worries!
-            </p>
-
+            <div class="card-p-text">
+            </div>
         </form>
     </card>
 

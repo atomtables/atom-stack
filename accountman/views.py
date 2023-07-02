@@ -37,9 +37,13 @@ def register_request(request):
 
 
 def login_request(request):
+    if request.GET['next'] is not None:
+        redirect_url = request.GET['next']
+    else:
+        redirect_url = '/'
     if request.user.is_authenticated:
         messages.success(request, f"No need to sign in: You are signed in as {request.user.username}")
-        return redirect('/')
+        return redirect(redirect_url)
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -49,13 +53,15 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                redirect('/')
+                return redirect(redirect_url)
             else:
-                messages.error(request, "Invalid username or password.")
+                messages.error(request, "Invalid password. Please try again.")
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.error(request, "Invalid username and/or password.")
+        print(form.errors)
     form = AuthenticationForm()
-    return render(request=request, template_name="accountman/login.html", context={"login_form": form})
+    return render(request=request, template_name="accountman/login.html", context={"login_form": form,
+                                                                                   'login_errors': form.errors})
 
 
 def logout_request(request):
