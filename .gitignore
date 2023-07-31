@@ -5,3 +5,7 @@ venv
 /.idea/.gitignore
 *.pyc
 .run
+accountman/.DS_Store
+*.pyc
+*.DS_Store
+*.pyc
