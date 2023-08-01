@@ -8,4 +8,3 @@ venv
 accountman/.DS_Store
 *.pyc
 *.DS_Store
-*.pyc
