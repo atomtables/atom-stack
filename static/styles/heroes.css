@@ -1,0 +1,148 @@
+html, body {
+    height: 100%
+}
+
+hero.main {
+    /*background-color: #ffffff;*/
+    background-size: cover;
+    color: rgb(255, 255, 255);
+    width: calc(100% - 30px);
+    padding: 15px;
+    display: flex;
+    min-height: 35%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.inner-hero-left {
+    width: 50%;
+    margin-left: 75px;
+}
+
+.inner-hero-right {
+    width: 50%;
+    margin-left: calc(50% - 75px);
+}
+
+/* MOBILE MODE */
+@media screen and (max-width: 610px) {
+    .inner-hero-left {
+        width: 100%;
+        margin: 0;
+    }
+
+    .inner-hero-right {
+        width: 100%;
+        margin: 0;
+    }
+
+    div.block-text {
+        width: 100% !important;
+    }
+}
+
+.hero-main-text {
+    font-size: 40px;
+    color: white;
+    text-align: left;
+    padding: 10px 0;
+    font-weight: 200;
+}
+
+.left-text {
+    text-align: left;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.hero-button-group {
+    padding-top: 10px;
+}
+
+.hero-button:disabled, .hero-button[disabled] {
+    background-color: rgb(20, 50, 20);
+    color: rgb(150, 150, 150);
+}
+
+/* input type text  */
+input[type=text].hero-input, input[type=email].hero-input, input[type=password].hero-input {
+    padding: 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+input[type=file].hero-input {
+    padding: 5px;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+textarea[type=large-text].hero-input {
+    padding: 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: 16px;
+    display: inline-block;
+    resize: vertical; /* Allow vertical resizing */
+    max-height: 300px;
+    overflow: visible;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    width: 300px;
+}
+
+.hero-input {
+    flex: 1
+}
+
+.hero-input:first-child {
+    margin-right: 20px;
+}
+
+block.block {
+    min-height: 100px;
+    display: block;
+    padding: 50px;
+}
+
+div.block-main {
+    font-weight: 300;
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+div.block-text {
+    padding-top: 10px;
+    width: 50%;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+div.block-button-group {
+    padding-top: 10px;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}

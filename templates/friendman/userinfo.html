@@ -1,85 +1,182 @@
-{% extends "global/base.html" %}
+{% extends "global/containers/account_info.html" %}
 
-{% block content %}
+{% block set_active_user_details %} active {% endblock %}
 
-    <card class="main">
-        <div style="display:flex; justify-content: space-between; padding: 10px;">
-            <div style="display: flex; align-items:flex-start;">
-                <img class="pfp" src="{{ pfp }}" alt="pfp">
-                <padder class="padding-space"></padder>
-                <div class="main-text"
-                     style="font-size: x-large; display: flex; flex-direction: column; justify-content: flex-start;">
-                    <div>{{ username }}</div>
-                    <div style="font-size:large">important info here</div>
-                    <div style="font-size:medium">Online/Away/Offline/Do Not Disturb</div>
-                </div>
-            </div>
-            <div class="card-button-group" style="text-align: right;">
-                <button class="card-button"><a href="/account/register">Register</a></button>
-                <button class="card-button"><a href="/account/password_reset">Forgot Password</a></button>
-                <div style="font-size:medium; padding-top: 5px;text-align:right;" class="">
-                    Created account on {{ date_joined }}
-                </div>
-                <div style="font-size:medium; padding-top: 5px; text-align: right;">
-                    Last logged in on {{ last_login }}
-                </div>
-            </div>
+{% block main %}
+
+
+    <!--
+    <content class="content">
+        <div class="content-name">
+            User Details
         </div>
-        <div class="card-p-text" style="display: flex;">
-            <div style="flex: 1; text-align: left; word-wrap: break-word;">
-                {{ bio }}
+        <columns class="profile-columns">
+            <div class="profile-picture-info-container">
+                <img src="{{ pfp }}" alt="Profile Picture" class="profile-picture">
+                <div class="profile-picture-info">
+                    {% if friend == 'Y' or friend == 'IR' or friend == 'OR' %}
+                        <div class="profile-name">{{ first_name }} {{ last_name }}</div>
+                        <div class="profile-username">{{ username }}</div>
+                        {% if is_active %}
+                            <div class="profile-misc-info top-margin">Created account on {{ date_joined }}</div>
+                            <div class="profile-misc-info">Last seen {{ last_seen }}</div>
+                        {% else %}
+                            <div class="profile-misc-info top-margin">Created account on {{ date_joined }}</div>
+                            <div class="profile-misc-info" style="color: lightpink">Account has since been deleted.</div>
+                        {% endif %}
+                    {% else %}
+                        <div class="profile-name">{{ username }}</div>
+                        <div class="profile-misc-info top-margin">Created account on {{ date_joined }}</div>
+                        <div class="profile-misc-info">Last seen {{ last_seen }}</div>
+                    {% endif %}
+                </div>
             </div>
-            <div class="card-button-group">
-                {% if friend == 'N' %}
-                    <a class="card-button" onclick="request_friendship()" id="request_button">Request Friendship</a>
-                {% elif friend == 'R' %}
-                    <a class="card-button" disabled>Friendship Requested</a>
-                {% elif friend == 'Y' %}
-                    <a class="card-button">Remove Friend</a>
-                {% elif friend == 'S' %}
-                    <a class="card-button" href="/account/login?next=/friend/user/{{ username }}">Sign in to Add
-                        Friend</a>
+            <div class="profile-public-info">
+                <div class="profile-bio">
+                    <div class="content-heading profile-header">About:</div>
+                    {% if bio != "" %}
+                        {{ bio }}
+                    {% else %}
+                        <i>This user has not set a bio yet.</i>
+                    {% endif %}
+                </div>
+                <div class="profile-button-group">
+                    {% if friend == 'N' %}
+                        <button class="button profile-button">Add Friend</button>
+                    {% elif friend == 'OR' %}
+                        <button class="button profile-button" disabled>Friend Request Sent</button>
+                    {% elif friend == 'IR' %}
+                        <button class="button profile-button">Accept Friend</button>
+                        <padder class="padding-space"></padder>
+                        <button class="button profile-button">Decline Friend</button>
+                    {% elif friend == 'Y' %}
+                        <button class="button profile-button">Chat</button>
+                        <padder class="padding-space"></padder>
+                        <button class="button profile-button">Remove Friend</button>
+                    {% elif friend == None %}
+                        <a class="content-button profile-button" href="/account/login">Sign in to Add
+                            Friends</a>
+                    {% endif %}
+                </div>
+            </div>
+        </columns>
+        <hr>
+        <columns>
+            <div class="column">
+                <div class="content-heading">Mutual Friends:</div>
+                <padder class="padder-space"></padder>
+                <ul class="list-parent">
+                    {% for friend in mutuals %}
+                        <li>
+                            <a href="/friend/user/{{ friend.username }}">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="{{ friend.pfp }}" alt="{{ friend.username }}'s profile picture"
+                                                 style="display: block;height: 48px;width: 48px;object-fit: cover;border-radius: 10px;margin: 0 5px 0 auto;background-color:rgb(120, 240, 120)">
+                                        </td>
+                                        <td>
+                                            <div style="font-size: 22px; font-weight: 500;">{{ friend.name }}</div>
+                                            <div style="font-size: 16px; font-weight: 300;">Last
+                                                seen {{ friend.last_seen }}</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column">
+                <div class="content-heading">Recent Activity:</div>
+            </div>
+        </columns>
+
+    </content>
+    -->
+
+
+    <content class="content">
+        <div class="content-name">
+            <a href="/friend/list">All Friends</a>
+        </div>
+        <div class="content-name">
+            <a href="/account/profile">My Profile</a>
+        </div>
+        <div class="content-name">
+            <a href="/friend/search">Search</a>
+        </div>
+        <div class="content-name content-name-selected">
+            User Details
+        </div>
+        <div class="profile-banner"></div>
+        <!--  <columns> is a flex container that allows for content on both sides of the screen  -->
+        <columns class="columns">
+            <div class="profile-picture-info-container left-text">
+                <script>
+                    function coolColors() {
+                        var vibrant = new Vibrant(document.querySelector(".profile-picture"), 64, 5);
+                        var swatches = vibrant.swatches()
+                        for (var swatch in swatches)
+                            if (swatches.hasOwnProperty(swatch) && swatches[swatch])
+                                console.log(swatch, swatches[swatch].getHex())
+                        document.querySelector(".profile-banner").style.background = "linear-gradient(45deg, " + swatches["DarkVibrant"].getHex() + ", " + swatches["DarkMuted"].getHex() + ")";
+                    }
+                </script>
+                <img src="{{ pfp }}" alt="Profile Picture" class="profile-picture"
+                     id="pfp-img" onload="coolColors()">
+                <div class="profile-picture-info">
+                    <div class="profile-name">{{ first_name }} {{ last_name }}</div>
+                    <div class="profile-username">{{ username }}</div>
+                </div>
+            </div>
+
+            <br>
+            <div class="profile-public-info">
+                <div class="profile-bio" id="profile-bio">
+                    {% if bio != "" %}
+                        {{ bio }}
+                    {% else %}
+                        <i>This user does not have a page yet.</i>
+                    {% endif %}
+                </div>
+                <div class="profile-button-group center-text">
+                    {% if friend == 'N' %}
+                        <button class="button profile-button">Add Friend</button>
+                    {% elif friend == 'OR' %}
+                        <button class="button profile-button" disabled>Friend Request Sent</button>
+                    {% elif friend == 'IR' %}
+                        <button class="button profile-button">Accept Friend</button>
+                        <padder class="padding-space"></padder>
+                        <button class="button profile-button">Decline Friend</button>
+                    {% elif friend == 'Y' %}
+                        <button class="button profile-button">Chat</button>
+                        <padder class="padding-space"></padder>
+                        <button class="button profile-button">Remove Friend</button>
+                    {% elif friend == None %}
+                        <a class="content-button profile-button" href="/account/login">Sign in to Add
+                            Friends</a>
+                    {% endif %}
+                </div>
+            </div>
+            <script>
+                {% if bio != "" %}
+                    document.querySelector('#profile-bio').innerHTML = DOMPurify.sanitize(
+                        marked.parse(
+                            `{{ bio }}`.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, "")
+                        )
+                    );
                 {% endif %}
-            </div>
-        </div>
+            </script>
+            <br>
+            <div class="profile-misc-info top-margin">Created account on {{ date_joined }}</div>
+            {% if is_active %}
+                <div class="profile-misc-info">Last seen {{ last_seen }}</div>
+            {% else %}
+                <div class="profile-misc-info" style="color: lightpink">Account has since been deleted.</div>
+            {% endif %}
+        </columns>
 
-    </card>
-    <script>
-
-        // TODO: replace XMLHttpRequest with fetch
-        function request_friendship() {
-            let rq = new XMLHttpRequest();
-            rq.open("GET", '/api/frq/{{ username }}', true);
-            rq.send(null);
-            let status;
-            setTimeout(() => {
-                status = rq.status
-                if (status === 200) {
-                    document.location.reload();
-                } else if (status === 403) {
-                    document.location.href = '/friend/user/{{ username }}?error=403';
-                } else {
-                    document.location.href = '/friend/user/{{ username }}?error=true';
-                }
-            }, 500)
-        }
-
-        function remove_friendship() {
-            let rq = new XMLHttpRequest();
-            rq.open("GET", '/api/fd/{{ username }}', true);
-            rq.send(null);
-            let status;
-            setTimeout(() => {
-                status = rq.status
-                if (status === 200) {
-                    document.location.reload();
-                } else if (status === 403) {
-                    document.location.href = '/friend/user/{{ username }}?error=403';
-                } else {
-                    document.location.href = '/friend/user/{{ username }}?error=true';
-                }
-            }, 500)
-        }
-    </script>
+    </content>
 
 {% endblock %}

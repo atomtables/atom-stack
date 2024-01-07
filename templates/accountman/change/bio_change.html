@@ -1,28 +1,25 @@
-{% extends "global/base.html" %}
+{% extends "global/containers/friend_account.html" %}
 
-{% block content %}
+{% block set_active_change_bio %} active {% endblock %}
 
-    <card class="main">
-        <div class="main-text">
-            Change Bio:
+{% block main %}
+
+    <main class="content">
+        <div class="content-name">
+            Change Bio
         </div>
-        <form method="POST">
+        <form method="POST" class="content-centered">
             <br>
             {% csrf_token %}
-            <div class="card-p-text"> <!--style="display: flex; justify-content: space-evenly"-->
-                {% csrf_token %}
-                <div class="card-p-text">
-                    Bio:
-                </div>
-                <div class="card-input">
-                    {{ form.bio.errors }}
-                    {{ form.bio }}
-                </div>
+            <div class="content-heading">
+                Bio:
             </div>
-            <div class="card-button-group">
-                <button class="card-button" type="submit">Set Bio</button>
+            <div class="input">
+                {{ form.bio.errors }}
+                {{ form.bio }}
             </div>
+            <button class="button" type="submit">Set Bio</button>
         </form>
-    </card>
+    </main>
 
 {% endblock %}

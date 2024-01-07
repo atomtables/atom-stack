@@ -1,9 +1,14 @@
+body {
+    position: relative;
+    bottom: 20px;
+}
+
 a {
     color: white;
     text-decoration: none;
 }
 
-.header-button {
+.button {
     text-align: center;
     font-size: 16px;
     transition-duration: 0.25s;
@@ -11,33 +16,58 @@ a {
     color: white;
     border: none;
     font-family: 'Inter', sans-serif;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 8px;
+    box-shadow: 2px 2px 5px black;
+    text-wrap: none;
+    text-overflow: ellipsis;
 }
 
-.header-button:hover {
-    background-color: rgb(40, 40, 40);
+.button-accent {
+    background-color: rgb(20, 50, 20);
 }
 
-.header-button:active {
-    background-color: rgb(60, 60, 60);
+.button-accent-breathe {
+    animation: breathe 1.5s infinite alternate;
 }
 
 .header-button-active {
     background-color: rgb(60, 60, 60) !important;
 }
 
+.button:active {
+    background-color: rgb(60, 60, 60) !important;
+}
+
+.button:hover {
+    background-color: rgb(40, 40, 40);
+}
+
+.button[disabled] {
+    background-color: rgb(20, 20, 20);
+    color: rgb(100, 100, 100);
+    box-shadow: none;
+}
+
 .title {
     font-weight: 500;
     font-size: 3ex;
     color: white;
+    padding: 8px;
     display: inline-block;
     vertical-align: middle;
-    background-color: rgb(37, 50, 37);
+    background-color: rgb(20, 40, 20);
     border: none;
     font-family: 'Inter', sans-serif;
     height: 100%;
     text-align: left;
+    box-shadow: none;
+}
+
+.user-selector {
+    display: inline-flex;
+    border-radius: 0 !important;
+    background-color: rgb(32, 50, 32);
 }
 
 .right-selectors {
@@ -63,11 +93,13 @@ img.me {
 }
 
 .header {
-    background-color: rgb(37, 50, 37);
+    background-color: rgb(20, 40, 20);
     display: flex;
     justify-content: space-between;
-    border-radius: 10px;
-    padding: 10px;
+    border-bottom: aquamarine 2px solid;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 padder.padding-space {
@@ -79,12 +111,14 @@ img.user-pfp {
     height: 48px;
     width: 48px;
     object-fit: cover;
-    border-radius: 100%;
+    border-radius: 10px;
+    background-color: rgb(120, 240, 120);
 }
 
 .user_container {
     display: inline-block;
     font-size: 16px;
+    border-radius: 0;
 }
 
 .user_firstname {
@@ -119,19 +153,34 @@ img.user-pfp {
 }
 
 @keyframes slideInAnimation {
-  0% {
-    transform: translateX(40%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+    0% {
+        transform: translateX(40%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideOutAnimation {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes breathe {
+    0% {
+        background-color: rgb(20, 30, 20); /* Start color */
+    }
+    100% {
+        background-color: rgb(20, 80, 20); /* End color */
+    }
+}
+
+@media screen and (max-width: 610px) {
+    .mobile-hide {
+        display: none;
+    }
 }

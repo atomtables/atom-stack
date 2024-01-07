@@ -1,0 +1,148 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+    <!--<card class="main">
+        <div style="display:flex; justify-content: space-between; padding: 10px;">
+            <div style="display: flex; align-items:flex-start;">
+                <img class="pfp" src="{{ pfp }}" alt="pfp">
+                <padder class="padding-space"></padder>
+                <div class="main-text"
+                     style="font-size: x-large; display: flex; flex-direction: column; justify-content: flex-start;">
+                    {% if friend == 'Y' %}
+                    <div>{{ first_name }} {{ last_name }}</div>
+                    <div style="font-size:large">{{ username }}</div>
+                    <div style="font-size:medium">Online/Away/Offline/Do Not Disturb</div>
+                    {% else %}
+                    <div>{{ username }}</div>
+                    <div style="font-size:medium">Offline</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-button-group" style="text-align: right;">
+                <button class="card-button"><a href="/account/register">Register</a></button>
+                <button class="card-button"><a href="/account/password_reset">Forgot Password</a></button>
+                <div style="font-size:medium; padding-top: 5px;text-align:right;" class="">
+                    Created account on {{ date_joined }}
+                </div>
+                <div style="font-size:medium; padding-top: 5px; text-align: right;">
+                    Last logged in on {{ last_login }}
+                </div>
+            </div>
+        </div>
+        <div class="card-p-text" style="display: flex;">
+            <div style="flex: 1; text-align: left; word-wrap: break-word;">
+                {{ bio }}
+            </div>
+            <div class="card-button-group">
+                {% if friend == 'N' %}
+                    <a class="card-button" onclick="request_friendship()" id="request_button">Request Friendship</a>
+                {% elif friend == 'R' %}
+                    <a class="card-button" disabled>Friendship Requested</a>
+                {% elif friend == 'Y' %}
+                    <a class="card-button">Remove Friend</a>
+                {% elif friend == 'S' %}
+                    <a class="card-button" href="/account/login?next=/friend/user/{{ username }}">Sign in to Add
+                        Friend</a>
+                {% endif %}
+            </div>
+        </div>
+
+    </card>
+    <script>
+
+        // TODO: replace XMLHttpRequest with fetch
+        function request_friendship() {
+            let rq = new XMLHttpRequest();
+            rq.open("GET", '/api/frq/{{ username }}', true);
+            rq.send(null);
+            let status;
+            setTimeout(() => {
+                status = rq.status
+                if (status === 200) {
+                    document.location.reload();
+                } else if (status === 403) {
+                    document.location.href = '/friend/user/{{ username }}?error=403';
+                } else {
+                    document.location.href = '/friend/user/{{ username }}?error=true';
+                }
+            }, 500)
+        }
+
+        function remove_friendship() {
+            let rq = new XMLHttpRequest();
+            rq.open("GET", '/api/fd/{{ username }}', true);
+            rq.send(null);
+            let status;
+            setTimeout(() => {
+                status = rq.status
+                if (status === 200) {
+                    document.location.reload();
+                } else if (status === 403) {
+                    document.location.href = '/friend/user/{{ username }}?error=403';
+                } else {
+                    document.location.href = '/friend/user/{{ username }}?error=true';
+                }
+            }, 500)
+        }
+    </script>-->
+    <container class="main">
+        <sidebar class="sidebar">
+            <div class="sidebar-heading bottom-spacing">
+                <a href="/">&lt;-- Back Home</a>
+            </div>
+            <div class="sidebar-heading">
+                Users
+            </div>
+            <div class="sidebar-detail" {% block set_active_all_friends %} {% endblock %}>
+                <a href="/friend/list">All Friends</a>
+            </div>
+            <div class="sidebar-detail" {% block set_active_search %} {% endblock %}>
+                Search
+            </div>
+            <div class="sidebar-detail" {% block set_active_user_details %} {% endblock %}>
+                User Details
+            </div>
+            <div class="bottom-spacing"></div>
+            {% if user.is_authenticated %}
+                <div class="sidebar-heading">
+                    Profile
+                </div>
+                <div class="sidebar-detail" {% block set_active_my_profile %} {% endblock %}>
+                    <a href="/account/profile">My Profile</a>
+                </div>
+                <div class="bottom-spacing"></div>
+            {% endif %}
+            <div class="sidebar-heading">
+                Account
+            </div>
+            {% if user.is_authenticated %}
+                <div class="sidebar-detail" {% block set_active_modify_profile %} {% endblock %}>
+                        <a href="/account/settings/pfp-change">Modify Profile</a>
+                </div>
+                <div class="sidebar-detail" {% block set_active_change_name %} {% endblock %}>
+                    Change Name
+                </div>
+                <div class="sidebar-detail" {% block set_active_change_username %} {% endblock %}>
+                    Change Username
+                </div>
+                <div class="sidebar-detail" {% block set_active_change_password %} {% endblock %}>
+                    Change Password
+                </div>
+                <div class="sidebar-detail" {% block set_active_delete_account %} {% endblock %}>
+                    Delete Account
+                </div>
+            {% else %}
+                <div class="sidebar-detail" {% block set_active_login %} {% endblock %}>
+                    <a href="/account/login">Login</a>
+                </div>
+                <div class="sidebar-detail" {% block set_active_register %} {% endblock %}>
+                    <a href="/account/register">Register</a>
+                </div>
+            {% endif %}
+        </sidebar>
+        {% block main %}
+        {% endblock %}
+    </container>
+
+{% endblock %}

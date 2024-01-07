@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'chatting',
     'friendman',
     'ebay_helper',
-    'apirq',
+    'blogsite',
 ]
 
 MIDDLEWARE = [

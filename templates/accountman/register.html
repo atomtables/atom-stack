@@ -1,62 +1,76 @@
-{% extends "global/base.html" %}
+{% extends "global/containers/account_info.html" %}
 
-{% block content %}
-    <card class="main">
-        <div class="main-text">
-            Register
-        </div>
-        <form method="POST">
-            <br>
+{% block set_active_register %} active {% endblock %}
+
+{% block main %}
+    <style>
+        container.main {
+            display: flex;
+        }
+    </style>
+    <content class="content">
+        <div class="content-name"><a href="/account/login">Login</a></div>
+        <div class="content-name content-name-selected"><a href="/account/register">Register</a></div>
+        <form method="POST"
+              class="content-centered"
+              style="top: 60%">
             {% csrf_token %}
-            <div class="card-p-text" style="display: flex;">
-                <div class="card-input">
+            <div class="content-heading"><b>Register</b> via email</div>
+            <padder class="padding-space"></padder>
+            <div class="collapsible">
+                <div class="input">
                     First Name: {{ register_form.first_name }}
                 </div>
-                <padder class="padding-space"></padder>
-                <div class="card-input">
+                <div class="input">
                     Last Name: {{ register_form.last_name }}
                 </div>
                 <br><br>
-                <div class="card-input">
+                <div class="input">
                     Username: {{ register_form.username }}
                 </div>
-                <padder class="padding-space"></padder>
-                <div class="card-input">
+                <div class="input">
                     Email: {{ register_form.email }}
                 </div>
             </div>
-            <div class="card-p-text" style="display: flex;">
-                <div class="card-p-text">
-                    Requirements for your password:
-                    <ul>
-                        <li>Your password can’t be too similar to your other info.</li>
-                        <li>Your password must be longer than 8 characters.</li>
-                        <li>Your password can’t be common.</li>
-                    </ul>
-                </div>
-                <div class="card-input">
+            <div class="collapsible">
+                <div class="input">
                     Password: {{ register_form.password1 }}
                 </div>
-                <div class="card-input">
+                <div class="input">
                     Confirmation: {{ register_form.password2 }}
                 </div>
             </div>
-            <div class="card-button-group">
-                <button class="card-button" type="submit">
+            <div>
+                <button class="button button-accent button-accent-breathe" type="submit">
                     Register
                 </button>
-                <div class="container py-5">
-                    <p class="text-center">
-                        If you already have an account, <a href="/account/login" class="user_links">login</a> instead.
+                <padder class="padding-space"></padder>
+                <button class="button">
+                    Register with Google
+                </button>
+                <div class="container">
+                    <p class="align-left">
+                    <h3>Requirements for your password</h3>
+                    Your password can’t be too similar to your other info.<br>
+                    Your password must be longer than 8 characters.<br>
+                    Your password can’t be common.<br><br><br>
+                    If you already have an account, <a href="/account/login" class="user_links">login</a> instead.
                     <br>
-                        You can change additional information about your user later in your user settings.
-                        However, you can't change your username unless you create a new account.
-                    </p>
+                    <!-- error -->
+                    {% if register_form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for field in register_form %}
+                                {% for error in field.errors %}
+                                    <strong>{{ error|escape }}</strong>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </form>
 
-    </card>
+    </content>
 
     <!--Register-->
 

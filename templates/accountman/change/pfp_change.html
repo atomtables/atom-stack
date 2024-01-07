@@ -1,24 +1,23 @@
-{% extends "global/base.html" %}
+{% extends "global/containers/friend_account.html" %}
 
-{% block content %}
+{% block main %}
 
-    <card class="main">
-        <div class="main-text">
-            Change Profile Picture:
+    <main class="content">
+        <div class="content-name">
+            Change Profile Picture
         </div>
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" class="content-centered">
             <br>
             {% csrf_token %}
-            <div class="card-p-text" style="display: flex; justify-content: space-evenly">
-                <div class="card-input">
-                    {{ form.profile_picture.errors }}
-                    Profile Picture: {{ form.profile_picture }}
-                </div>
+            <div class="content-heading">Profile Picture:</div>
+            <br>
+            Old PFP: <img src="{{ user.profile.profile_picture.url }}" class="profile-picture" alt="Profile Picture" width="100" height="100">
+            <div class="input">
+                {{ form.profile_picture.errors }}
+                Profile Picture: {{ form.profile_picture }}
             </div>
-            <div class="card-button-group">
-                <button class="card-button" type="submit">Set PFP</button>
-            </div>
+            <button class="button" type="submit">Set PFP</button>
         </form>
-    </card>
+    </main>
 
 {% endblock %}

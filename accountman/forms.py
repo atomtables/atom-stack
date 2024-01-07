@@ -66,7 +66,7 @@ class EditEmailForm(forms.ModelForm):
 
 
 class EditBioForm(forms.ModelForm):
-    bio = forms.Field(label="Bio", widget=forms.Textarea(attrs={'type': 'large-text'}))
+    bio = forms.Field(label="Bio", widget=forms.Textarea(attrs={'type': 'large-text'}), required=False)
 
     class Meta:
         model = User

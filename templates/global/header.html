@@ -4,18 +4,26 @@
 
 <header class="header">
     <div class="header-text">
-        <button class="title" onclick="document.location.href = '/';">
+        <button class="title" id="titleButton" onclick="document.location.href = '/';">
             &lt;atomtables&gt;
         </button>
     </div>
     <div class="right-selectors">
-        <button class="header-button" onclick="document.location.href = '/friend/list'">Friend List</button>
-        <padder class="padding-space"></padder>
-        <button class="header-button" onclick="document.location.href = '/chatting/main'">Chat</button>
-        <padder class="padding-space"></padder>
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}" {% endif %} >
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <padder class="padding-space mobile-hide"></padder>
+        <button class="button mobile-hide" onclick="document.location.href = '/friend/list'">Friend List</button>
+        <padder class="padding-space mobile-hide"></padder>
+        <button class="button mobile-hide" onclick="document.location.href = '/admin'">Admin</button>
+        <padder class="padding-space mobile-hide"></padder>
         {% if user.is_authenticated %}
             <!-- the user is considered to be logged in?-->
-            <div class="title header-button" style="display: inline-flex;" id="userInfo" onclick="dropdownOnClick()">
+            <div class="title button user-selector" id="userInfo" onclick="dropdownOnClick()">
                 <img class="user-pfp" src="{{ user.profile.profile_picture.url }}" alt="avatar">
                 <padder class="padding-space"></padder>
                 <div class="user_container">
@@ -25,16 +33,14 @@
                 <padder class="padding-space to-disappear"></padder>
                 <div class="dropdown-content">
                     <padder class="padding-space"></padder>
-                    <a class="header-button dropdown-link" href="/account/settings">Settings</a>
+                    <a class="button dropdown-link" href="/account/profile">Account</a>
                     <padder class="padding-space"></padder>
-                    <a class="header-button dropdown-link" href="/account/logout">Log Out</a>
-                    <padder class="padding-space"></padder>
-                    <a class="header-button dropdown-link" href="#">Link 3</a>
+                    <a class="button dropdown-link" href="/account/logout">Sign Out</a>
                 </div>
             </div>
         {% else %}
-            <div class="title header-button" style="display: inline-flex;" id="userInfo">
-                <img class="user-pfp" src="{% static "img/user_pfp.webp" %}" alt="avatar">
+            <div class="title button" style="display: inline-flex;" id="userInfo">
+                <img class="user-pfp" src="/media/profile_pictures/user_pfp.png" alt="avatar">
                 <padder class="padding-space"></padder>
                 <div class="user_container">
                     <div class="user_firstname"><a href="/account/login?next={{ request.path }}" class="user_links">Sign
@@ -46,13 +52,6 @@
 
     </div>
 </header>
+<div style="display: block; height: 67px;"></div>
 
 <script src="{% static 'scripts/header_dropdown.js' %}"></script>
-
-{% if messages %}
-    {% for message in messages %}
-        <div {% if message.tags %} class="{{ message.tags }}" {% endif %} >
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}

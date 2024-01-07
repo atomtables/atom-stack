@@ -1,22 +1,66 @@
 {% extends "global/base.html" %}
 {% load static %}
 {% block content %}
-    <card class="main">
-        <div class="main-text">
-            Hi! My name is atomtables!
+    <hero class="main" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/img/cool.png') no-repeat fixed 50% 100%; background-size: 1920px 1200px;">
+        <div class="inner-hero-left">
+            <div class="hero-main-text">
+                <b>atomtables.</b> at your service.
+            </div>
+            <div class="hero-inner-text left-text">
+                Hello there! I'm <b>Adithiya Venkatakrishnan</b>, a 14yo aspiring developer and musician.
+                I'm passionate about technology, especially when it comes to the companies I use every day. I also
+                dabble in music, and I play the piano.
+            </div>
         </div>
-        <div class="card-p-text">
-            My name is Adithiya Venkatakrishnan, or atomtables. I am a 13-yo developer learning Python, basic CSS, and
-            Java
-            in my journey of learning code. Check out some of my projects, or some of my skills I want to learn!
+    </hero>
+    <block class="block" style="background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/static/img/cool.png') no-repeat fixed 50% 100%;">
+        <div class="block-main">
+            <b>opinionated.</b> like there's no tomorrow.
         </div>
-        <div class="card-button-group">
-            <button class="card-button">
-                AtomChat
-            </button>
-            <button class="card-button">
-                My other projects
-            </button>
+        <div class="block-text">
+            I may not know everything, but you can always guarantee that if I do know enough, I will probably have
+            an educated opinion on it. I'm not afraid to speak my mind, and I'm not afraid to be wrong. I'm also not
+            afraid to admit when I'm wrong, and I'm always open to new ideas.
         </div>
-    </card>
+        <div class="block-button-group">
+            <a class="button center-text button-accent button-accent-breathe" href="/account/profile">
+                To the blog!
+            </a>
+        </div>
+    </block>
+    <hero class="main" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/img/some-background.png') no-repeat fixed 50% 25%; background-size: 1875px 2500px;">
+        <div class="inner-hero-right">
+            <div class="hero-main-text right-text">
+                Check out some of my <b>projects.</b>
+            </div>
+            <div class="hero-inner-text right-text">
+                It might not be a lot, but I have a few projects that I'm proud of. I'm always working on something,
+                so check back often! Below are a few that are in a decent enough state to show off.
+            </div>
+            <div class="hero-button-group right-text">
+                <a class="button" href="//github.com/atomtables/AtomChatJBS">
+                    AtomChatJBS
+                </a>
+                <padder class="padding-space" href="//github.com/atomtables/rate-my-teachers"></padder>
+                <a class="button">
+                    RateMyTeachers
+                </a>
+            </div>
+        </div>
+    </hero>
+    <block class="block" style="background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/static/img/some-background.png') no-repeat fixed center;">
+        <div class="block-main">
+            <b>github.</b> veda's best friend.
+        </div>
+        <div class="block-text">
+            All of my development projects can be found on GitHub. Don't you love it when your favorite open-source
+            developer Linus Torvalds makes a small little program called Git that becomes the backbone for one of
+            the most widely used version control systems in the world? I sure do.
+        </div>
+        <div class="block-button-group">
+            <a class="button center-text button-accent button-accent-breathe" href="//github.com/atomtables">
+                github.com/atomtables
+            </a>
+        </div>
+    </block>
 {% endblock %}

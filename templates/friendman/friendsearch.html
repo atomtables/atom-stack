@@ -1,0 +1,25 @@
+{% extends "global/containers/account_info.html" %}
+
+{% block main %}
+
+    <content class="content">
+        <div class="content-name">
+            <a href="/account/profile">My Profile</a>
+        </div>
+        <div class="content-name content-name-selected">
+            <a href="/friend/search">Search</a>
+        </div>
+
+        <columns class="columns">
+            <form action="/friend/search" method="get">
+                <div class="input">
+                    <input type="text" name="search" placeholder="Search for a user">
+                </div>
+                <input type="submit" value="Search" class="button button-accent button-accent-breathe">
+            </form>
+        </columns>
+
+    </content>
+
+{% endblock %}
+

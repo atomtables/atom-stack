@@ -6,7 +6,6 @@ from .models import Friend, FriendRelationship, FriendRequestRelationship
 class FriendManagementAdmin(admin.ModelAdmin):
     list_display = ('user',)
 
-
 class FriendRelationshipManagementAdmin(admin.ModelAdmin):
     list_display = ('id', 'friend1', 'friend2', 'date_added')
 

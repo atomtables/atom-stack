@@ -3,18 +3,32 @@
 {% load static %}
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script data-pace-options='{ "eventLag": { "lagThreshold": 90 } }' src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
     <title>{% block title %} Adithiya's Website {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles/django_messages.css' %}">
-    <link rel="stylesheet" href="{% static "styles/cards.css" %}">
-    <!--suppress CssUnknownTarget -->
+    <link rel="stylesheet" href="{% static "styles/heroes.css" %}">
+    <link rel="stylesheet" href="{% static "styles/list.css" %}">
+    <link rel="stylesheet" href="/static/styles/content.css">
+    <script src="/static/scripts/Vibrant.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/scripts/purify.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--suppress CssUnknownTarget -->`
     <style>
         /* import roboto font from google */
-        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
         /* set background image */
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
         body {
-            background-image: url('{% static 'img/background.png' %}');
+            /*background-image: url('
+        
+        {% static 'img/background.png' %}  ');*/
+            background-color: rgb(20, 40, 20);
             font-family: 'Inter', sans-serif;
+            margin: 0 auto;
         }
     </style>
 </head>

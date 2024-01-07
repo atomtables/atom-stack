@@ -1,14 +1,148 @@
-{% extends "global/base.html" %}
+{% extends "global/containers/account_info.html" %}
 
-{% block content %}
+{% block set_active_all_friends %} active {% endblock %}
+
+{% block main %}
+
+    <content class="content">
+        <div class="content-name content-name-selected">
+            <a href="/friend/list">All Friends</a>
+        </div>
+        <div class="content-name">
+            <a href="/account/profile">My Profile</a>
+        </div>
+        <div class="content-name">
+            <a href="/friend/search">Search</a>
+        </div>
+        {% if not friends and not friend_requests %}
+            <div style="margin: auto; width: 50%; text-align: center; position: relative; top: 50%; transform: translate(0, -85%);">
+                <h1 style="margin: auto;">No Friends</h1>
+                <h3>Search for people to add, or ask them to add you!</h3>
+                <button class="button">Search for friends</button>
+            </div>
+        {% else %}
+            <ul class="list-parent">
+                {% if friend_requests %}
+                    {% for friend in friend_requests %}
+                        <li>
+                            <div style="width: 100%; display: flex; justify-content: space-between;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="{{ friend.pfp }}" alt="{{ friend.username }}'s profile picture"
+                                                 style="display: block;height: 48px;width: 48px;object-fit: cover;border-radius: 10px;margin: 0 5px 0 auto;background-color:rgb(120, 240, 120)">
+                                        </td>
+                                        <td>
+                                            <div style="font-size: 22px; font-weight: 500;">{{ friend.name }}
+                                                <div style="color: lightgrey; display: inline-block">
+                                                    : {{ friend.username }}</div>
+                                            </div>
+                                            <div style="font-size: 16px; font-weight: 300;">
+                                                Last seen {{ friend.last_seen }}
+                                                {% if not friend.is_active %}
+                                                    •
+                                                    <div style="color: lightpink; display: inline-block;">Account is
+                                                        deleted
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                {% if friend.outgoing %}
+                                    <div class="button-group" style="align-items: center; display: flex;">
+                                        <button class="button" disabled>Outgoing Friend Request</button>
+                                        <padder class="padding-space"></padder>
+                                        <button class="button">Unrequest</button>
+                                        <padder class="padding-space"></padder>
+                                        <button class="button">
+                                            <a href="/friend/user/{{ friend.username }}"
+                                               style="display: inline-block;">
+                                                View Profile
+                                            </a>
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <div class="button-group" style="align-items: center; display: flex;">
+                                        <button class="button">Accept Request</button>
+                                        <padder class="padding-space"></padder>
+                                        <button class="button">Decline Request</button>
+                                        <padder class="padding-space"></padder>
+                                        <button class="button">
+                                            <a href="/friend/user/{{ friend.username }}"
+                                               style="display: inline-block; justify-self: flex-start;">
+                                                View Profile
+                                            </a>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <hr>
+                {% endif %}
+                {% if friends %}
+                    {% for friend in friends %}
+                        <li>
+                            <div style="width: 100%; display: flex; justify-content: space-between">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="{{ friend.pfp }}" alt="{{ friend.username }}'s profile picture"
+                                                 style="display: block;height: 48px;width: 48px;object-fit: cover;border-radius: 10px;margin: 0 5px 0 auto;background-color:rgb(120, 240, 120)">
+                                        </td>
+                                        <td>
+                                            <div style="font-size: 22px; font-weight: 500;">{{ friend.name }}</div>
+                                            <div style="font-size: 16px; font-weight: 300;">
+                                                Last seen {{ friend.last_seen }}
+                                                {% if not friend.is_active %}
+                                                    •
+                                                    <div style="color: lightpink; display: inline-block;">Account is
+                                                        deleted
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="button-group" style="align-items: center; display: flex;">
+                                    {% if not friend.is_active %}
+                                        <button class="button button-accent">Remove</button>
+                                    {% else %}
+                                        <button class="button">Message</button>
+                                    {% endif %}
+                                    <padder class="padding-space"></padder>
+                                    <button class="button">
+                                        <a href="/friend/user/{{ friend.username }}">
+                                            View Profile
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <div style="margin: auto; width: 50%; text-align: center;">
+                <button class="button" style="margin-top: 5px">Add more friends!</button>
+            </div>
+        {% endif %}
+    </content>
+
+{% endblock %}
+
+
+
+<!--
+
     <link rel="stylesheet" href="/static/styles/cards__list.css">
     <card class="main main__list">
         <div class="list-item">
             <div style="display:flex; justify-content: space-between; padding: 10px;">
                 <div class="list-item-h" style="font-size: x-large">Friends</div>
-                <div class="card-button-group">
-                    <a href="/friend/add" class="card-button">Add Friend</a>
-                    <a href="/friend/requests" class="card-button">Friend Requests</a>
+                <div class="hero-button-group">
+                    <a href="/friend/add" class="hero-button">Add Friend</a>
+                    <a href="/friend/requests" class="hero-button">Friend Requests</a>
                 </div>
             </div>
             {% if not friends %}
@@ -27,7 +161,8 @@
                                         <td>
                                             <div style="font-size:22px">{{ friend.user }}</div>
                                             Friended on {{ friend.date_added }} -- {% if friend.status == "Online" %} <span
-                                                    style="color: green">Online</span> {% else %} {{ friend.status }} {% endif %}
+                                                    style="color: green">Online</span> {% else %} {{ friend.status }}
+{% endif %}
                                         </td>
                                     </tr>
                                 </table>
@@ -37,6 +172,4 @@
                 </ul>
             {% endif %}
         </div>
-    </card>
-
-{% endblock %}
+    </card>-->

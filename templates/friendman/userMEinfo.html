@@ -1,0 +1,186 @@
+{% extends "global/containers/account_info.html" %}
+
+{% block set_active_my_profile %} active {% endblock %}
+
+{% block main %}
+
+    <content class="content">
+        <div class="content-name content-name-selected">
+            <a href="/account/profile">My Profile</a>
+        </div>
+        <div class="content-name">
+            <a href="/friend/search">Search</a>
+        </div>
+        <div class="profile-banner"></div>
+        <!--  <columns> is a flex container that allows for content on both sides of the screen  -->
+        <columns class="columns">
+            <div class="profile-picture-info-container left-text">
+                <script>
+                    function coolColors() {
+                        var vibrant = new Vibrant(document.querySelector(".profile-picture"), 64, 5);
+                        var swatches = vibrant.swatches()
+                        document.querySelector(".profile-banner").style.background = "linear-gradient(45deg, " + swatches["DarkVibrant"].getHex() + ", " + swatches["DarkMuted"].getHex() + ")";
+                    }
+
+                    coolColors();
+                </script>
+                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture"
+                     id="pfp-img" onload="coolColors()">
+                <div class="profile-picture-info">
+                    <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+                    <div class="profile-username">{{ user.username }}</div>
+                </div>
+            </div>
+            <br>
+            <div class="profile-public-info">
+                <div class="profile-bio" id="profile-bio">
+                    {% if user.profile.bio != "" %}
+                        {{ user.profile.bio }}
+                    {% else %}
+                        <i>This user does not have a page yet.</i>
+                    {% endif %}
+                </div>
+                <div class="profile-more-info" style="width: 50rem;">
+                    <button class="button">Change Profile Picture</button>
+                    <padder class="padding-space"></padder>
+                    <button class="button">Change Bio</button>
+                    <padder class="padding-space"></padder>
+                    <button class="button">Add more friends!</button>
+                </div>
+                <div class="profile-more-info" style="width: 95vw">
+                    {% if not friends and not friend_requests %}
+                        <div style="margin: auto; width: 50%; text-align: center; position: relative; top: 50%; transform: translate(0, -85%);">
+                            <h1 style="margin: auto;">No Friends</h1>
+                            <h3>Search for people to add, or ask them to add you!</h3>
+                            <button class="button">Search for friends</button>
+                        </div>
+                    {% else %}
+                        <ul class="list-parent">
+                            {% if friend_requests %}
+                                {% for friend in friend_requests %}
+                                    <li>
+                                        <div style="width: 100%; display: flex; justify-content: space-between;">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ friend.pfp }}"
+                                                             alt="{{ friend.username }}'s profile picture"
+                                                             style="display: block;height: 48px;width: 48px;object-fit: cover;border-radius: 10px;margin: 0 5px 0 auto;background-color:rgb(120, 240, 120)">
+                                                    </td>
+                                                    <td>
+                                                        <div style="font-size: 22px; font-weight: 500;">
+                                                            {{ friend.name }}:
+                                                            <div style="color: lightgrey; display: inline-block">
+                                                                {{ friend.username }}</div>
+                                                        </div>
+                                                        <div style="font-size: 16px; font-weight: 300;">
+                                                            Last seen {{ friend.last_seen }}
+                                                            {% if not friend.is_active %}
+                                                                •
+                                                                <div style="color: lightpink; display: inline-block;">
+                                                                    Account is
+                                                                    deleted
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {% if friend.outgoing %}
+                                                <div class="button-group" style="align-items: center; display: flex;">
+                                                    <!--<button class="button" disabled>Outgoing Friend Request</button>
+                                                    <padder class="padding-space"></padder>-->
+                                                    <button class="button">Unrequest</button>
+                                                    <padder class="padding-space"></padder>
+                                                    <button class="button">
+                                                        <a href="/friend/user/{{ friend.username }}"
+                                                           style="display: inline-block;">
+                                                            View Profile
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            {% else %}
+                                                <div class="button-group" style="align-items: center; display: flex;">
+                                                    <button class="button">Accept Request</button>
+                                                    <padder class="padding-space"></padder>
+                                                    <button class="button">Decline Request</button>
+                                                    <padder class="padding-space"></padder>
+                                                    <button class="button">
+                                                        <a href="/friend/user/{{ friend.username }}"
+                                                           style="display: inline-block; justify-self: flex-start;">
+                                                            View Profile
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                                <hr>
+                            {% endif %}
+                            {% if friends %}
+                                {% for friend in friends %}
+                                    <li>
+                                        <div style="width: 100%; display: flex; justify-content: space-between">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ friend.pfp }}"
+                                                             alt="{{ friend.username }}'s profile picture"
+                                                             style="display: block;height: 48px;width: 48px;object-fit: cover;border-radius: 10px;margin: 0 5px 0 auto;background-color:rgb(120, 240, 120)">
+                                                    </td>
+                                                    <td>
+                                                        <div style="font-size: 22px; font-weight: 500;">{{ friend.name }}</div>
+                                                        <div style="font-size: 16px; font-weight: 300;">
+                                                            Last seen {{ friend.last_seen }}
+                                                            {% if not friend.is_active %}
+                                                                •
+                                                                <div style="color: lightpink; display: inline-block;">
+                                                                    Account is
+                                                                    deleted
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="button-group" style="align-items: center; display: flex;">
+                                                {% if not friend.is_active %}
+                                                    <button class="button button-accent">Remove</button>
+                                                {% else %}
+                                                    <button class="button">Message</button>
+                                                {% endif %}
+                                                <padder class="padding-space"></padder>
+                                                <button class="button">
+                                                    <a href="/friend/user/{{ friend.username }}">
+                                                        View Profile
+                                                    </a>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+            </div>
+            <script>
+                {% if user.profile.bio != "" %}
+                    document.querySelector('#profile-bio').innerHTML = DOMPurify.sanitize(
+                        marked.parse(
+                            `{{ user.profile.bio }}`.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, "")
+                        )
+                    );
+                {% endif %}
+            </script>
+            <br>
+            <div class="profile-misc-info top-margin">Created account on {{ user.date_joined }}</div>
+            <div class="profile-misc-info"><i>This is how your profile looks</i></div>
+
+        </columns>
+
+    </content>
+
+{% endblock %}

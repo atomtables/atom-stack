@@ -1,0 +1,35 @@
+div.list-container {
+    display: flex;
+    width: 85%;
+    height: 75%;
+}
+
+div.list-heading {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.list-parent {
+    list-style-type: none;
+    text-align: left;
+    padding: 0;
+    margin: 5px auto;
+}
+
+.list-parent > li {
+    padding: 0.5rem 1rem;
+}
+
+.list-parent > li:nth-child(odd) {
+    background: linear-gradient(135deg, rgba(20, 40, 20, 0.9), rgba(40, 60, 40, 0.9));
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.list-parent > li:nth-child(even) {
+    background: linear-gradient(135deg, rgba(20, 20, 40, 0.9), rgba(40, 40, 60, 0.9));
+    border-radius: 10px;
+    margin: 5px;
+}

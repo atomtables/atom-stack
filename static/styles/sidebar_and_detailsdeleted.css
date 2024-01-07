@@ -1,0 +1,262 @@
+container.main {
+    min-height: calc(100vh - 67px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(20, 40, 20);
+    margin: 20px;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
+}
+
+sidebar.sidebar {
+    width: 12.5%;
+    margin: 10px;
+    padding: 10px 0 10px 10px;
+    border-radius: 10px;
+    background-color: rgb(20, 60, 20);
+    transition-duration: 200ms;
+}
+
+div.sidebar-heading {
+    font-size: 18px;
+    font-weight: 300;
+    padding: 5px;
+    transition-duration: 200ms;
+}
+
+.bottom-spacing {
+    margin-bottom: 10px;
+}
+
+.top-margin {
+    margin-top: 20px;
+}
+
+div.sidebar-detail {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    padding: 5px;
+    margin-right: 5px;
+    transition-duration: 200ms;
+}
+
+div.sidebar-detail:hover {
+    letter-spacing: 1px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+div.sidebar-detail[active] {
+    font-weight: 600;
+    border-right: limegreen solid 4px;
+    /* letter-spacing: 1px; */
+}
+
+main.content {
+    width: 87.5%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(20, 60, 20);
+}
+
+div.content-name {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px;
+    /* make all capitals */
+    text-transform: uppercase;
+    border-bottom: 2px solid white;
+    margin-bottom: 10px;
+}
+
+div.content-heading {
+    font-size: x-large;
+    font-weight: 300;
+    padding: 0;
+}
+
+button.button {
+    text-align: center;
+    font-size: 16px;
+    transition-duration: 0.1s;
+    background-color: rgb(30, 80, 30);
+    color: white;
+    border: 2px white double;
+    font-family: 'Inter', sans-serif;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+button.button:hover {
+    background-color: rgb(50, 100, 50);
+}
+
+button.button:active {
+    background-color: rgb(70, 120, 70);
+}
+
+button.button[disabled] {
+    background-color: rgb(20, 70, 20);
+    color: rgb(150, 150, 150);
+}
+
+.content-centered {
+    margin: auto;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -85%);
+}
+
+@media screen and (max-height: 695px) {
+    .content-centered {
+        margin: auto;
+        text-align: center;
+        position: initial;
+        top: initial;
+        transform: initial;
+    }
+}
+
+columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.column {
+    width: 48%;
+    padding: 10px;
+    border-radius: 10px;
+    display: block;
+    /*display: flex;
+    flex-direction: column;
+    justify-content: flex-start;*/
+    background-color: rgb(20, 80, 20);
+    margin: 5px;
+}
+
+div.input > input[type=text], div.input > input[type=email], div.input > input[type=password] {
+    padding: 6px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: 14px;
+}
+
+div.input > input[type=file] {
+    padding: 5px;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+div.input > textarea[type=large-text] {
+    padding: 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: 16px;
+    display: inline-block;
+    resize: vertical; /* Allow vertical resizing */
+    max-height: 300px;
+    overflow: visible;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    width: 300px;
+}
+
+.input {
+    flex: 1
+}
+
+.input:first-child {
+    margin-right: 20px;
+}
+
+/* anything that starts with profile-* is a part of the userinfo.html */
+
+img.profile-picture {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: rgb(120, 240, 120)
+}
+
+div.profile-picture-info-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+div.profile-picture-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+div.profile-name {
+    font-size: 32px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+div.profile-username {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+div.profile-misc-info {
+    font-size: 16px;
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+div.profile-public-info {
+    max-width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+div.profile-bio {
+    font-size: 16px;
+    font-weight: 300;
+    text-align: right;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(20, 80, 20);
+}
+
+button.button.profile-button {
+    margin-top: 5px;
+}
+
+div.profile-button-group {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+div.profile-header {
+    margin-bottom: 5px;
+}
+
+columns.columns {
+    height: initial;
+}
+

@@ -1,0 +1,245 @@
+container.main {
+    min-height: calc(100vh - 155px);
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+content.content {
+    display: block;
+    text-align: center;
+    width: 100vw;
+    padding: 20px 0;
+    color: white;
+    /*background-color: #000000;*/
+}
+
+div.content-name {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid white;
+    margin-bottom: 10px;
+}
+
+div.content-name-selected {
+    border-bottom: limegreen solid 2px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+div.content-heading {
+    font-size: 24px;
+    font-weight: 300;
+    padding: 5px;
+}
+
+.content-centered {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+div.input > input[type=text], div.input > input[type=email], div.input > input[type=password] {
+    padding: 6px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: 1rem;
+}
+
+div.input > input[type=file] {
+    padding: 5px;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: 1rem;
+}
+
+div.input > textarea[type=large-text] {
+    padding: 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid rgb(20, 70, 20);
+    border-radius: 10px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: 1rem;
+    display: inline-block;
+    resize: vertical; /* Allow vertical resizing */
+    max-height: 300px;
+    overflow: visible;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    width: 300px;
+}
+
+.input {
+    flex: 1;
+    display: inline-block;
+    font-weight: 300;
+}
+
+.input {
+    margin-right: 10px;
+}
+
+.collapsible {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+    .collapsible {
+        flex-direction: column;
+    }
+}
+
+
+img.profile-picture {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: rgb(120, 240, 120)
+}
+
+div.profile-picture-info-container {
+    display: flex;
+    align-items: flex-start;
+    margin: auto;
+    z-index: 2;
+}
+
+div.profile-banner {
+    display: block;
+    height: 200px;
+    position: relative;
+    top: 60px;
+    border-radius: 20px;
+    width: 95%;
+    margin: -60px auto auto auto;
+}
+
+div.profile-picture-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 30px;
+}
+
+div.profile-name {
+    font-size: 32px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+div.profile-username {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+div.profile-misc-info {
+    font-size: 16px;
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+div.profile-public-info {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+div.profile-bio {
+    font-size: 16px;
+    font-weight: 300;
+    text-align: left;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(20, 80, 20);
+    margin: 0 auto;
+    overflow-wrap: break-word;
+    max-width: 50rem;
+}
+
+div.profile-bio > h1 {
+    font-size: 22px;
+    padding: 0;
+}
+
+div.profile-bio > h2 {
+    font-size: 18px;
+    padding: 0;
+}
+
+div.profile-bio > h3 {
+    font-size: 16px;
+    padding: 0;
+}
+
+div.profile-bio > h4 {
+    font-size: 14px;
+    padding: 0;
+}
+
+div.profile-bio > h5 {
+    font-size: 12px;
+    padding: 0;
+}
+
+div.profile-bio > h6 {
+    font-size: 10px;
+    padding: 0;
+}
+
+div.profile-bio > p {
+    font-size: 16px;
+    padding: 0;
+}
+
+button.button.profile-button {
+    margin-top: 5px;
+}
+
+div.profile-button-group {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+div.profile-header {
+    margin-bottom: 5px;
+}
+
+columns.columns {
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    flex-direction: column;
+    height: initial;
+    margin: 0 auto;
+    width: max-content;
+}
+
+div.profile-more-info {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(20, 80, 20);
+    max-width: 100%;
+}
+
