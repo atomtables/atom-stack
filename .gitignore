@@ -1,0 +1,9 @@
+db.sqlite3
+static/media/profile_pictures
+venv
+.idea
+/.idea/.gitignore
+*.pyc
+.run
+accountman/.DS_Store
+*.DS_Store
