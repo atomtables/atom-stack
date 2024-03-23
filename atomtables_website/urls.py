@@ -27,31 +27,32 @@ from django.urls import path, include
 from ninja import NinjaAPI
 from ninja.security import APIKeyHeader, HttpBearer
 
+class NAPI(NinjaAPI):
+    def create_response(self, *a, **kw) -> HttpResponse:
+        response = super().create_response(*a, **kw)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+
 from atomtables_website import settings
 
 class InvalidToken(Exception):
     pass
+
 class Authorization(HttpBearer):
     def authenticate(self, request, token):
         if token == settings.SECRET_KEY:
             return token
-
-        raise InvalidToken()
-
-class NAPI(NinjaAPI):
-    def create_response(self, *a, **kw) -> HttpResponse:
-        response = super().create_response(*a, **kw)
-        response["Content-Type"] = "application/json"
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
+        raise InvalidToken
 
 api = NAPI(auth=Authorization())
+
 @api.exception_handler(InvalidToken)
 def on_invalid_token(request, exc):
     return api.create_response(request, {"error": "API Key Invalid.", "code": -4}, status=401)
 
 api.add_router("/account", "accountman.views.api")
 api.add_router("/friend", "friendman.views.api")
+api.add_router("/blog", "blogsite.views.api")
 
 urlpatterns = [
     path('', api.urls),
