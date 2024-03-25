@@ -1,5 +1,6 @@
 from ninja import Router
 
+from accountman.views import AuthRequiredErrorOut
 from atomtables_website.schemas import SuccessData
 from blogsite.models import BlogPost
 
@@ -11,6 +12,18 @@ def blog_list(request):
     return {
     }
 
+@api.get("/post/{post_id}/like")
+def blog_like(request, post_id: str):
+    if not request.user.is_authenticated:
+        return AuthRequiredErrorOut()
+
+    blog = BlogPost.objects.get(id=post_id)
+
+    blog.blog_likes.add(request.user)
+
+    return SuccessData(info={
+        "likes": blog.blog_likes.count()
+    })
 
 @api.get("/post/{post_id}")
 def blog_post(request, post_id: str):
@@ -32,8 +45,9 @@ def blog_post(request, post_id: str):
             "images": [image.image.url for image in blog.blog_images.order_by('blog_image_id')],
             "captions": [image.caption for image in blog.blog_images.order_by('blog_image_id')]
         },
+        "likes": blog.blog_likes.count(),
         "comments": {
-            "count": blog.comments.count(),
+            "count": blog.comments.all().count(),
             "comments": [{
                 "user": {
                     "username": comment.user.username,
