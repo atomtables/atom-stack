@@ -79,9 +79,10 @@ class UserCreationFatalErrorOut(ErrorOut):
 
 @api.get("/info", response={200: AccountInfoOut, 204: Schema, 500: UnrecoverableError})
 def account_info(request):
+    print(request.COOKIES)
     try:
         if not request.user.is_authenticated:
-            return api.create_response(request, "", status=204)
+            return api.create_response(request, "Not Authenticated", status=204)
         user = request.user
         return 200, AccountInfoOut(info={
             "is_authenticated": True,

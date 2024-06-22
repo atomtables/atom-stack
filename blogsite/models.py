@@ -31,11 +31,13 @@ class BlogPost(models.Model):
     title_image_caption = models.CharField(max_length=200, blank=True)
     content = models.TextField()
     comments = models.ManyToManyField(Comment, blank=True)
+    comments_count = models.IntegerField(default=0)
     blog_images = models.ManyToManyField(BlogImage, blank=True)
     blog_likes = models.ManyToManyField(User, blank=True, related_name='blog_likes')
+    blog_likes_count = models.IntegerField(default=0)
 
 @receiver(pre_save, sender=Comment)
-def preupdate_comments(sender, instance, created, **kwargs):
+def preupdate_comments(sender, instance, **kwargs):
     instance.blog_post.comments.remove(instance)
     instance.user.profile.user_blog_comments.remove(instance)
 
@@ -45,7 +47,7 @@ def update_comments(sender, instance, created, **kwargs):
     instance.user.profile.user_blog_comments.add(instance)
 
 @receiver(pre_save, sender=BlogPost)
-def preupdate_blogpost(sender, instance, created, **kwargs):
+def preupdate_blogpost(sender, instance, **kwargs):
     instance.author.profile.user_blog_posts.remove(instance)
 
 @receiver(post_save, sender=BlogPost)
@@ -53,7 +55,7 @@ def update_blogpost(sender, instance, created, **kwargs):
     instance.author.profile.user_blog_posts.add(instance)
 
 @receiver(pre_save, sender=BlogImage)
-def preupdate_blogimage(sender, instance, created, **kwargs):
+def preupdate_blogimage(sender, instance, **kwargs):
     instance.blog_post.blog_images.remove(instance)
 
 @receiver(post_save, sender=BlogImage)

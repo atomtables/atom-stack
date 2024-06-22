@@ -19,6 +19,7 @@ Error Codes:
 -2:     Authentication required
 -3:     Empty arguments
 -4:     API Key Invalid
+-5:     Resource Not Found
 -10-19: Account-MAN specific error
 """
 from django.conf.urls.static import static
@@ -55,6 +56,6 @@ api.add_router("/friend", "friendman.views.api")
 api.add_router("/blog", "blogsite.views.api")
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', api.urls),
-    path('admin', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

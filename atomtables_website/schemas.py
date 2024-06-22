@@ -5,6 +5,7 @@ class SuccessOut(Schema):
     code: int = 1
 
 class SuccessData(SuccessOut):
+    code: int = 2
     info: object = {}
 
 class ErrorOut(Schema):
@@ -29,3 +30,6 @@ class UnrecoverableError(ErrorOut):
     error: str = "Guru Meditation"
     code: int = -1
 
+class NotFoundErrorOut(ErrorOut):
+    error: str = "Resource not found"
+    code: int = -5
